@@ -4,20 +4,20 @@
  Required packages:
   simpleSound:
    
-   pip/3 install simpleSound
+    pip/3 install simpleSound
    
   wikipedia:
    
-   pip/3 install wikipedia
+    pip/3 install wikipedia
    
   ibm_watson
    
-   pip/3 install ibm-watson
+    pip/3 install ibm-watson
    
   
   speech_recognition:
    
-   pip/3 install speechRecognition
+    pip/3 install speechRecognition
   
  
  DEFINITELY still in progress.

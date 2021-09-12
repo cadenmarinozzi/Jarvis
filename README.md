@@ -1,7 +1,8 @@
 # Jarvis
  The only required authentication is an IBM Watson token. Add it to configuration.json
  
- Required packages: * simpleSound:\
+ # Required packages: 
+ * simpleSound:\
    pip/3 install simpleSound
    
   * wikipedia:\

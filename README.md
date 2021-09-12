@@ -1,5 +1,6 @@
 # Jarvis
  The only required authentication is an IBM Watson token. Add it to configuration.json
+ DEFINITELY still in progress.
  
  # Required packages: 
  * simpleSound:\
@@ -13,6 +14,3 @@
    
   * speech_recognition:\
    pip/3 install speechRecognition
-  
- 
- DEFINITELY still in progress.

@@ -1,4 +1,9 @@
-import requests
+import requests, json
+
+file = open("configuration.json");
+fileContents = file.read();
+configuration = json.loads(fileContents);
+appid = configuration["weather_api"]["appid"];
 
 def weather(textToSpeech, phrases, text):
     textString = "";
@@ -11,7 +16,7 @@ def weather(textToSpeech, phrases, text):
     for phrase in phrases["now"]:
         city = textString.split("in")[1].replace(phrase, "");
 
-    weatherResponse = requests.get("http://api.openweathermap.org/data/2.5/weather?appid=8113fec12b95b254d44c72b30f271319&q=" + city + "&units=imperial");
+    weatherResponse = requests.get("http://api.openweathermap.org/data/2.5/weather?appid=" + appid + "&q=" + city + "&units=imperial");
     responseJson = weatherResponse.json();
     responseCode = responseJson["cod"];
 

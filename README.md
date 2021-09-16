@@ -1,5 +1,5 @@
 # Jarvis
- Add your ibm_watson, newsapi, and wolframalpha tokens to configuration.cfg.\
+ Add your ibm_watson, newsapi, openweatherapi, and wolframalpha tokens to configuration.cfg.\
  DEFINITELY still in progress.
  
  # Required packages: 
@@ -32,4 +32,3 @@
 
  * speedtest:\
    pip/3 install speedtest
-  

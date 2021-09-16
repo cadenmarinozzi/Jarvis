@@ -5,18 +5,18 @@ def _time(textToSpeech, phrases, text):
     textString = "";
     place = "";
 
-    for index, string in enumerate(text):
-        textString += string + (index == len(text) and "" or " ");
+    # for index, string in enumerate(text):
+    #     textString += string + (index == len(text) and "" or " ");
         
-    for phrase in phrases["now"]:
-        if (phrase in textString):
-            textString = textString.replace(phrase, "");
+    # for phrase in phrases["now"]:
+    #     if (phrase in textString):
+    #         textString = textString.replace(phrase, "");
 
-    for phrase in phrases["placeIdentifiers"]:
-        if (phrase in textString):
-            place = textString.split(phrases["placeIdentifiers"][phrase])[1];
+    # for phrase in phrases["placeIdentifiers"]:
+    #     if (phrase in textString):
+    #         place = textString.split(phrases["placeIdentifiers"][phrase])[1];
 
-            break;
+    #         break;
 
     randomAnswerNow = random.randint(0, len(phrases["answerNow"]) - 1);
     answerNow = list(phrases["answerNow"])[randomAnswerNow];

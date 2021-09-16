@@ -34,5 +34,11 @@
         "it's the": "it's the",
         "it is the": "it is the",
         "today is the": "today is the"
-    }   
+    },
+    "prefixes": {
+        "jarvis": "jarvis",
+        "arvest": "arvest",
+        "harvest": "harvest",
+        "garvis": "garvis"
+    }
 }

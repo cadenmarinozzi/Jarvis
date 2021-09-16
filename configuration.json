@@ -1,5 +1,11 @@
 {
     "ibm_watson": {
         "token": ""
+    },
+    "newsapi": {
+        "api_key": ""
+    },
+    "wolfram_alpha": {
+        "api_key": ""
     }
 }

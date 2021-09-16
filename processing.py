@@ -4,6 +4,12 @@ from lib.Modules.date import day, week, month, year, date
 from lib.Modules.ip import ip
 from lib.Modules.shutdown import shutdown
 from lib.Modules._wikipedia import _wikipedia
+from lib.Modules.news import news
+from lib.Modules.internetSpeed import upload, download
+from lib.Modules.system import cpu, ram
+from lib.Modules.weather import weather, temperature, airPressure, windSpeed, humidity
+from lib.Modules.joke import joke
+from lib.Modules.wolfram_alpha import wolfram
 import json
 
 file = open("lib/Speech/phrases.json", "r");
@@ -26,7 +32,18 @@ modules = {
     "date": date,
     "ip": ip,
     "shutdown": shutdown,
-    "wikipedia": _wikipedia
+    "wikipedia": _wikipedia,
+    "news": news,
+    "upload": upload,
+    "download": download,
+    "ram": ram,
+    "cpu": cpu,
+    "weather": weather,
+    "temperature": temperature,
+    "air pressure": airPressure,
+    "wind speed": windSpeed,
+    "humidity": humidity,
+    "joke": joke
 };
 
 class Processor():
@@ -75,7 +92,10 @@ class Processor():
 
                     break;
 
-                location += 1;        
+                location += 1;   
+
+            if (not commandFound):
+                wolfram(self.textToSpeech, phrases, tokens);
 
     def tokenize(self, text):
         tokens = [];

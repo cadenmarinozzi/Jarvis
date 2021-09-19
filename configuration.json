@@ -1,6 +1,7 @@
 {
     "ibm_watson": {
-        "token": ""
+        "token": "",
+        "service_url": ""
     },
     "newsapi": {
         "api_key": ""
@@ -10,5 +11,19 @@
     },
     "weather_api": {
         "appid": ""
+    },
+    "send_to_websocket": {
+        "enabled": false
+    },
+    "play_local": {
+        "enabled": true
+    },
+    "use_microphone": {
+        "enabled": true
+    },
+    "twilio": {
+        "number": "",
+        "account_sid": "",
+        "auth_token": ""
     }
 }

@@ -2,22 +2,25 @@ import speech_recognition as sr
 
 speechRecognizer = sr.Recognizer();
 
-def speechToText():
-    # with sr.Microphone() as source:
-    #     speechRecognizer.adjust_for_ambient_noise(source, duration = 1);
-    #     print("Listening...");
-    #     audio = speechRecognizer.listen(source);
-    #     recognized = "";
-        
-    #     try: 
-    #         recognized = speechRecognizer.recognize_google(audio, language = "en-US");
-    #     except sr.UnknownValueError:
-    #         errored = True;
+def speechToText(useMicrophone):
+    respones = "";
 
-    #     print("transcript: " + recognized);
+    if (useMicrophone):
+        with sr.Microphone() as source:
+            speechRecognizer.adjust_for_ambient_noise(source, duration = 1);
+            print("Listening...");
+            audio = speechRecognizer.listen(source);
+            recognized = "";
+            
+            try: 
+                recognized = speechRecognizer.recognize_google(audio, language = "en-US");
+            except sr.UnknownValueError:
+                errored = True;
 
-    #     return recognized;
-
-    print("Listening...");
+            print("transcript: " + recognized);
+            response = recognized;
+    else:
+        print("Listening...");
+        response = input();
     
-    return input();
+    return response;

@@ -10,7 +10,8 @@ from lib.Modules.system import cpu, ram
 from lib.Modules.weather import weather, temperature, airPressure, windSpeed, humidity
 from lib.Modules.joke import joke
 from lib.Modules.wolfram_alpha import wolfram
-import json
+from lib.Modules.music import *
+import json, _thread
 
 file = open("lib/Speech/phrases.json", "r");
 fileContents = file.read();
@@ -43,12 +44,26 @@ modules = {
     "air pressure": airPressure,
     "wind speed": windSpeed,
     "humidity": humidity,
-    "joke": joke
+    "joke": joke,
+    "play": play,
+    "pause": pause,
+    "unpause": unpause,
+    "restart": restart,
+    "stop": stop,
+    "volume": volume,
+    "mute": mute
 };
 
 class Processor():
-    def __init__(self, textToSpeech):
+    def __init__(self, textToSpeech, sms, number):
         self.textToSpeech = textToSpeech;
+        self.sms = sms;
+        self.number = number;
+
+        try:
+            self.lastSMS = sms.receive(number)[0];
+        except:
+            self.lastSMS = "";
 
     def process(self, text):
         text = text.lower();
@@ -105,3 +120,19 @@ class Processor():
             tokens.append(word);
 
         return tokens;
+
+    def handleSMS(self):
+        def smsThread(threadName, delay):
+            while (True):
+                messages = self.sms.receive(self.number);
+
+                try:
+                    lastMessage = messages[0];
+                except:
+                    lastMessage = "";
+
+                if (lastMessage != self.lastSMS):
+                    self.textToSpeech("You have a new text message from your twilio account. " + lastMessage);
+                    self.lastSMS = lastMessage;
+
+        _thread.start_new_thread(smsThread, ("Thread-2", 1, ));

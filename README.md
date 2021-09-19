@@ -1,5 +1,5 @@
 # Jarvis
- Add your ibm_watson, newsapi, openweatherapi, and wolframalpha tokens to configuration.cfg.\
+ Add your ibm_watson token, newsapi key, wolfram_alpha key, weather_api appid, and twilio number, account_sid, and auth_token to configuration.cfg.\
  DEFINITELY still in progress.
  
  # Required packages: 
@@ -32,3 +32,6 @@
 
  * speedtest:\
    pip/3 install speedtest
+
+ * twilio:\
+   pip/3 install twilio

@@ -12,6 +12,6 @@ class SMS():
         messages = self.client.messages.list(to = receiver);
 
         for message in messages:
-            returnMessages.append(message.body);
+            returnMessages.append(message);
 
         return returnMessages;

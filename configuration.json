@@ -19,7 +19,7 @@
         "enabled": true
     },
     "use_microphone": {
-        "enabled": true
+        "enabled": false
     },
     "twilio": {
         "number": "",

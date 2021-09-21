@@ -125,14 +125,16 @@ class Processor():
         def smsThread(threadName, delay):
             while (True):
                 messages = self.sms.receive(self.number);
-
+                message = messages[0];
+                    
                 try:
-                    lastMessage = messages[0];
+                    lastMessage = message.body;
                 except:
                     lastMessage = "";
 
                 if (lastMessage != self.lastSMS):
-                    self.textToSpeech("You have a new text message from your twilio account. " + lastMessage);
+                    self.textToSpeech("You have a new text message from" + message.from_.replace("", " "));
+                    self.textToSpeech(lastMessage);
                     self.lastSMS = lastMessage;
 
         _thread.start_new_thread(smsThread, ("Thread-2", 1, ));

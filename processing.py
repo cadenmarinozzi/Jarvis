@@ -1,4 +1,7 @@
-from lib.Modules._time import _time
+from os import environ
+environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1";
+
+from lib.Modules.time import _time
 from lib.Modules.greet import greet
 from lib.Modules.date import day, week, month, year, date
 from lib.Modules.ip import ip
@@ -11,12 +14,23 @@ from lib.Modules.weather import weather, temperature, airPressure, windSpeed, hu
 from lib.Modules.joke import joke
 from lib.Modules.wolfram_alpha import wolfram
 from lib.Modules.music import *
-import json, _thread
+from datetime import datetime
+from lib.Modules.wakeup import wakeup
+from lib.Modules.alarm import *
+import json, _thread, pygame, random, os, time
+import lib.Modules.wakeup
 
+pygame.init();
+pygame.mixer.init();
 file = open("lib/Speech/phrases.json", "r");
 fileContents = file.read();
 file.close();
 phrases = json.loads(fileContents);
+file = open("configuration.json");
+fileContents = file.read();
+configuration = json.loads(fileContents);
+wakeupTime = configuration["wakeupTime"];
+sendToWebsocket = configuration["send_to_websocket"];
 prefixes = {
     "jarvis",
     "arvest",
@@ -51,7 +65,9 @@ modules = {
     "restart": restart,
     "stop": stop,
     "volume": volume,
-    "mute": mute
+    "mute": mute,
+    "add": addAlarm,
+    "remove": removeAlarm
 };
 
 class Processor():
@@ -121,6 +137,75 @@ class Processor():
 
         return tokens;
 
+    def handleWakeup(self):
+        def wakeupThread(threadName, delay):
+            while (True):
+                _time = datetime.now().strptime(datetime.now().time().strftime("%H:%M"), "%H:%M").strftime("%#I:%#M %p");
+
+                if (_time == wakeupTime):
+                    dirFiles = os.listdir("Bin/");
+                    files = [];
+
+                    for file in dirFiles:
+                        if (".mp3" in file or ".wav" in file):
+                            files.append(file);
+
+                    filesLength = len(files);
+                    chosen = random.randint(0, filesLength - 1);
+                    file = files[chosen];
+                   
+                    if (sendToWebsocket):
+                        file = open("Bin/" + file, "rb");
+                        fileContents = file.read();
+                        encoded = base64.b64encode(fileContents);
+                        self.server.send_message_to_all(encoded);
+                        file.close();  
+
+                    pygame.mixer.music.load("Bin/" + file);
+                    pygame.mixer.music.play();
+                    time.sleep(25);
+                    pygame.mixer.music.fadeout(5000);
+                    wakeup(self.textToSpeech, phrases);
+
+        _thread.start_new_thread(wakeupThread, ("Thread-4", 1, ));
+
+    def handleAlarms(self):
+        def alarmThread(threadName, delay):
+            while (True):
+                _time = datetime.now().strptime(datetime.now().time().strftime("%H:%M:%S"), "%H:%M:%S").strftime("%#I:%#M:%#S %p");
+                file = open("data.json");
+                fileContents = file.read();
+                data = json.loads(fileContents);
+                file.close();
+                alarms = data["alarms"];
+
+                for alarm in alarms:
+                    if (alarm["time"] == _time):
+                        dirFiles = os.listdir("Bin/");
+                        files = [];
+
+                        for file in dirFiles:
+                            if (".mp3" in file or ".wav" in file):
+                                files.append(file);
+
+                        filesLength = len(files);
+                        chosen = random.randint(0, filesLength - 1);
+                        file = files[chosen];
+                         
+                        if (sendToWebsocket):
+                            file = open("Bin/" + file, "rb");
+                            fileContents = file.read();
+                            encoded = base64.b64encode(fileContents);
+                            self.server.send_message_to_all(encoded);
+                            file.close();  
+                            
+                        pygame.mixer.music.load("Bin/" + file);
+                        pygame.mixer.music.play();
+                        time.sleep(25);
+                        pygame.mixer.music.fadeout(5000);
+
+        _thread.start_new_thread(alarmThread, ("Thread-5", 1, ));
+
     def handleSMS(self):
         def smsThread(threadName, delay):
             while (True):
@@ -133,7 +218,7 @@ class Processor():
                     lastMessage = "";
 
                 if (lastMessage != self.lastSMS):
-                    self.textToSpeech("You have a new text message from" + message.from_.replace("", " "));
+                    self.textToSpeech("You have a text message from" + message.from_.replace("", " "));
                     self.textToSpeech(lastMessage);
                     self.lastSMS = lastMessage;
 

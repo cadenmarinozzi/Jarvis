@@ -1,6 +1,6 @@
 import random, json
 
-def greet(textToSpeech, phrases, tokens):
+def greet(textToSpeech, phrases, text):
     randomGreeting = random.randint(0, len(phrases["answerGreetings"]) - 1);
     greeting = list(phrases["answerGreetings"])[randomGreeting];
     randomGreet = random.randint(0, len(phrases["answerGreet"]) - 1);

@@ -26,6 +26,8 @@ client = Client(accountSID, authToken);
 sms = SMS(client);
 processor = Processor(textToSpeech.textToSpeech, sms, number);
 processor.handleSMS();
+processor.handleWakeup();
+processor.handleAlarms();
 
 while (True):
     response = speechToText(use_microphone);

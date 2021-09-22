@@ -1,7 +1,6 @@
 {
     "ibm_watson": {
-        "token": "",
-        "service_url": ""
+        "token": ""
     },
     "newsapi": {
         "api_key": ""
@@ -25,5 +24,6 @@
         "number": "",
         "account_sid": "",
         "auth_token": ""
-    }
+    },
+    "wakeupTime": ""
 }

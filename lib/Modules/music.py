@@ -2,18 +2,22 @@
 from os import environ
 environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1";
 
-import pygame, re, requests, sys, urllib.parse, urllib.request, pafy, os
+import pygame, re, requests, sys, urllib.parse, urllib.request, pafy, os, json
 import moviepy.editor as mp
 from bs4 import BeautifulSoup
 
 pygame.init();
 pygame.mixer.init();
+file = open("configuration.json");
+fileContents = file.read();
+configuration = json.loads(fileContents);
+sendToWebsocket = configuration["send_to_websocket"];
 
 def play(textToSpeech, phrases, text):
     textString = "";
 
     for index, string in enumerate(text):
-        textString += string + (index == len(text) and "" or " ");
+        textString += string + (index == len(text) - 1 and "" or " ");
 
     song = textString.split(" play ")[1];
     textToSpeech("Give me a moment to search for " + song);
@@ -29,6 +33,14 @@ def play(textToSpeech, phrases, text):
     mp.VideoFileClip("Temp\\music.mp4").audio.write_audiofile("Temp\\result.wav");
     os.remove("Temp\\music.mp4");
     textToSpeech("Now playing " + concatMusic["content"]);
+
+    if (sendToWebsocket): # send as wav for this (param in websocket send)
+        file = open("Temp\\result.wav", "rb");
+        fileContents = file.read();
+        encoded = base64.b64encode(fileContents);
+        self.server.send_message_to_all(encoded);
+        file.close();  
+
     pygame.mixer.music.load("Temp\\result.wav");
     pygame.mixer.music.play();
 
@@ -52,7 +64,7 @@ def volume(textToSpeech, phrases, text):
     textString = "";
 
     for index, string in enumerate(text):
-        textString += string + (index == len(text) and "" or " ");
+        textString += string + (index == len(text) - 1 and "" or " ");
 
     volume = re.search(re.compile("([0-9])"), textString);
     

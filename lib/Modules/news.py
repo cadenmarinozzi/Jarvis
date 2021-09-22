@@ -12,7 +12,7 @@ def news(textToSpeech, phrases, text):
     textString = "";
 
     for index, string in enumerate(text):
-        textString += string + (index == len(text) and "" or " ");
+        textString += string + (index == len(text) - 1 and "" or " ");
 
     amount = re.search(re.compile("([0-9])"), textString);
 

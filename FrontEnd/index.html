@@ -40,47 +40,6 @@
         </div>
 
         <button class="center secondary" id="enter">Enter</button> <!-- For user action -->
-
-        <script>
-            let link = "https://www.freewebhostingarea.com/";
-
-            function loop() {
-                let removed = false;
-
-                if (!removed) {
-                    setTimeout(function() {
-                        let elements = document.getElementsByTagName("a");
-                        
-                        for (let index = 0; index < elements.length; index++) {
-                            let element = elements[index];
-                            
-                            if (element.href === link) {
-                                element.remove();
-                                removed = true;
-                            }
-                        }
-
-                        if (!removed) { // Sometimes hosts use images for watermarks
-                            let elements = document.getElementsByTagName("img");
-                        
-                            for (let index = 0; index < elements.length; index++) {
-                                let element = elements[index];
-                                
-                                if (element.src === link) {
-                                    element.remove();
-                                    removed = true;
-                                }
-                            }
-                        }
-                        
-                        loop();
-                    }, 0);
-                }
-            }
-
-            loop();
-        </script>
-
         <script src="pageHandler.js"></script>
         <script src="script.js"></script>
     </body>

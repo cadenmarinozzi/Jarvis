@@ -1,0 +1,1 @@
+{"ibmWatson": {"token": "", "serviceUrl": ""}, "newsApi": {"apiKey": ""}, "wolframAlpha": {"apiKey": ""}, "weatherApi": {"appId": ""}, "sendToWebsocket": true, "playLocal": true, "useMicrophone": true, "twilio": {"number": "", "accountSid": "", "authToken": ""}, "wakeupTime": ""}

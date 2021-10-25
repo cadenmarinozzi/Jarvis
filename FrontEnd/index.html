@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Jarvis</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    </head>
+    
+    <body>        
+        <div id="page" hidden>
+            <div id="navbar">
+                <h1 class="title button">Jarvis <span><img id="settings" class="inline-center button" src="assets/settings.svg" width="20px" height="20px"><img id="profile" class="inline-center button" src="assets/profile.svg" width="20px" height="20px"></span></h1>
+            </div>
+            
+            <canvas></canvas>
+            <input class="input-box" placeholder="Jarvis what time is it">
+        </div>
+
+        <div id="settings_page" hidden>
+            <h1 class="title button">Jarvis <span><img class="inline-center button" src="assets/settings.svg" width="20px" height="20px"><img class="inline-center button" src="assets/profile.svg" width="20px" height="20px"></span></h1>
+            
+            <h3 class="secondary setting">Play local <button class="checkbox" id="play_locally">x</button>
+                <span><p class="body" style="font-weight:400">Plays audio files locally on the system through python instead of though the website in javascript.</p></span>
+            </h3>
+
+            <h3 class="secondary setting">Send to websocket <button class="checkbox" id="send_to_websocket">x</button>
+                <span><p class="body" style="font-weight:400">Sends audio files to the website to be played.</p></span>
+            </h3>
+
+            <h3 class="secondary setting">Use microphone <button class="checkbox" id="use_microphone">x</button>
+                <span><p class="body" style="font-weight:400">Uses speech recognition to run commands instead of a text based solution.</p></span>
+            </h3>
+
+            <h3 class="secondary setting">Wakeup time <input class="small-input" placeholder="hh:mm:ss AM" id="wakeup_time">
+                <span><p class="body" style="font-weight:400">The default wake up alarm time.</p></span>
+            </h3>
+        </div>
+
+        <button class="center secondary" id="enter">Enter</button> <!-- For user action -->
+
+        <script>
+            let link = "https://www.freewebhostingarea.com/";
+
+            function loop() {
+                let removed = false;
+
+                if (!removed) {
+                    setTimeout(function() {
+                        let elements = document.getElementsByTagName("a");
+                        
+                        for (let index = 0; index < elements.length; index++) {
+                            let element = elements[index];
+                            
+                            if (element.href === link) {
+                                element.remove();
+                                removed = true;
+                            }
+                        }
+
+                        if (!removed) { // Sometimes hosts use images for watermarks
+                            let elements = document.getElementsByTagName("img");
+                        
+                            for (let index = 0; index < elements.length; index++) {
+                                let element = elements[index];
+                                
+                                if (element.src === link) {
+                                    element.remove();
+                                    removed = true;
+                                }
+                            }
+                        }
+                        
+                        loop();
+                    }, 0);
+                }
+            }
+
+            loop();
+        </script>
+
+        <script src="pageHandler.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>

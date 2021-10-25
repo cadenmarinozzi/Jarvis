@@ -1,0 +1,44 @@
+{
+    "answerGreetings": {
+        "hello": "hello"
+    },
+    "greetings": {
+        "hello": " hello ",
+        "hey":  "hey ",
+        "yo": " yo ",
+        "howdy" : " howdy "
+    },
+    "questionIdentifiers": {
+        "what": " what "
+    },
+    "now": {
+        "right now": " right now ",
+        "at the moment": " at the moment ",
+        "at this moment": " at this moment "
+    },
+    "placeIdentifiers": {
+        "in": " in ",
+        "at": " at "
+    },
+    "answerNow": {
+        "it is currently": "it is currently",
+        "right now it is": "right now it is",
+        "it is": "it is",
+        "currently it is": "currently it is"
+    },
+    "answerGreet": {
+        "is there anything i can do for you?": "is there anything i can do for you?",
+        "what can i do for you?": "what can i do for you?"
+    },
+    "answerDateNow": {
+        "it's the": "it's the",
+        "it is the": "it is the",
+        "today is the": "today is the"
+    },
+    "prefixes": {
+        "jarvis": "jarvis",
+        "arvest": "arvest",
+        "harvest": "harvest",
+        "garvis": "garvis"
+    }
+}

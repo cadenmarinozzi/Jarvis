@@ -38,6 +38,7 @@ button {
     background: rgba(0, 0, 0, 0);
     border: 0;
     cursor: pointer;
+    outline: 0;
 }
 
 .inline-center {

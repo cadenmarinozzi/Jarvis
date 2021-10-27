@@ -68,7 +68,7 @@ function fade() {
     ramp();
 }
 
-let host = "192.168.4.70";
+let host = "98.210.224.5";
 let port = "8080";
 let connected = false;
 let renderIndex;
@@ -131,6 +131,7 @@ function connect() {
         inputBox.onkeydown = function(event) { // Overwrites
             if (event.key == "Enter") {
                 webSocket.send("exec___" + inputBox.value);
+                inputBox.value = "";
             }
         }
 
@@ -229,6 +230,7 @@ function connect() {
             setTimeout(function() {
                 fade();
             }, 25000);
+
             render();
         } else if (message.includes("ibmWatson")) {
             let configuration = JSON.parse(message);

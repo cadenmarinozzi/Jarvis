@@ -19,9 +19,6 @@ class TextToSpeech():
         synthesized = self.textToSpeechV1.synthesize(text, voice = "en-GB_JamesV3Voice", accept = "audio/mp3").get_result().content;
         file.write(synthesized);
         file.close();
-        
-        if (configuration["playLocal"]):
-            self.play("Temp/Speech.mp3");
 
         if (configuration["sendToWebsocket"]):
             file = open("Temp/Speech.mp3", "rb");
@@ -29,5 +26,8 @@ class TextToSpeech():
             encoded = base64.b64encode(fileContents);
             self.server.send_message_to_all(encoded);
             file.close();
+        
+        if (configuration["playLocal"]):
+            self.play("Temp/Speech.mp3");
 
         print("spoke: " + text);
